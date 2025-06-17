@@ -1,0 +1,56 @@
+<p>product-component works!</p>
+<h2>Add Product</h2>
+<form (ngSubmit)="addProduct()">
+  <input [(ngModel)]="newProduct.name" name="name" placeholder="Name" required />
+  <input [(ngModel)]="newProduct.availableItems" name="availableItems" type="number" placeholder="Quantity" required />
+  <input [(ngModel)]="newProduct.reservedItems" name="reservedItems" type="number" placeholder="Price" required />
+  <button type="submit">Add Product</button>
+</form>
+
+
+
+<hr />
+
+<h2>Search Product by ID</h2>
+<input [(ngModel)]="searchId" type="number" placeholder="Enter ID" />
+<button (click)="getProductById()">Search</button>
+<div *ngIf="productById">
+  <p><strong>ID:</strong> {{ productById.id }}</p>
+  <p><strong>Name:</strong> {{ productById.name }}</p>
+  <p><strong>Quantity:</strong> {{ productById.availableItems }}</p>
+  <p><strong>Price:</strong> {{ productById.reservedItems }}</p>
+</div>
+
+<hr />
+
+<h2>All Products</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th><th>Name</th><th>Quantity</th><th>Price</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.availableItems }}</td>
+      <td>{{ product.reservedItems }}</td>
+      <td>
+        <button (click)="populateUpdateForm(product)">Edit</button>
+        <button (click)="deleteProduct(product.id!)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2>Update Product</h2>
+<form (ngSubmit)="updateProduct()">
+  <input [(ngModel)]="updateProductData.id" name="id" type="number" placeholder="ID" readonly />
+  <input [(ngModel)]="updateProductData.name" name="updateName" placeholder="Name" required />
+  <input [(ngModel)]="updateProductData.availableItems" name="updateQty" type="number" placeholder="Quantity" required />
+  <input [(ngModel)]="updateProductData.reservedItems" name="updatePrice" type="number" placeholder="Price" required />
+  <button type="submit">Update</button>
+</form>
